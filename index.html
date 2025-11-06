@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Untuk Meliiichuuu ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at bottom, #0b1d2a 0%, #020912 100%);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+    color: #f8f8f8;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    color: #ffadc6;
+    font-size: 40px;
+    margin-bottom: 10px;
+    animation: fadeIn 1.2s ease-in-out;
+    letter-spacing: 1px;
+    z-index: 2;
+  }
+
+  p {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 24px 24px;
+    animation: fadeIn 1.5s ease-in-out;
+    z-index: 2;
+    transition: opacity 1s ease;
+  }
+
+  button {
+    background: #ff7da9;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(255,125,169,0.3);
+    z-index: 2;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    background: #ff96b7;
+  }
+
+  .flower {
+    position: absolute;
+    top: -10vh;
+    animation: fall linear forwards;
+    opacity: 0.7;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* kunang-kunang */
+  .firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, rgba(255,255,200,1) 0%, rgba(255,255,200,0) 70%);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: move 12s linear infinite, glow 2s ease-in-out infinite;
+  }
+
+  @keyframes move {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(30px, -40px); }
+    50% { transform: translate(-40px, 20px); }
+    75% { transform: translate(20px, 40px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  @keyframes glow {
+    0%, 100% { opacity: 0.3; box-shadow: 0 0 4px 2px rgba(255,255,200,0.6); }
+    50% { opacity: 1; box-shadow: 0 0 12px 6px rgba(255,255,180,0.9); }
+  }
+</style>
+</head>
+<body>
+  <h1>dari Tian Untuk Meli ❤️</h1>
+  <p id="message">Tekan tombol jika hatimu ingin mendengar sesuatu yang lembut.</p>
+  <button id="moodBtn">🌷 Buka Pesan 🌷</button>
+
+  <!-- Musik lembut (opsional, ganti src sesuai file kamu) -->
+  <audio id="bgm" src="suara.mp3" loop></audio>
+
+<script>
+const allMessages = [
+  "Ada sesuatu dalam dirimu yang bahkan senja pun iri melihatnya.",
+  "Setiap kali angin membawa harum bunga, aku teringat pada caramu diam.",
+  "Langit tak selalu biru, tapi setiap kali kusadar kau ada, warnanya kembali hidup.",
+  "Aku tak tahu sejak kapan mataku mencari, tapi selalu berhenti di arahmu.",
+  "Ada tenang yang aneh setiap kali namamu melintas di pikiranku.",
+  "Jika waktu bisa menulis, barangkali ia menulis puisi tentangmu di detik-detiknya.",
+  "Aku tak memuja dunia, hanya bagian kecil di dalamnya yang kebetulan bernama kamu.",
+  "Dalam riuhnya hidup, hatiku selalu memilih hening di dekat bayangmu.",
+  "Kau adalah alasan mengapa kata ‘indah’ terasa terlalu pendek.",
+  "Aku tak sedang menunggu siapa pun, hanya sedang belajar memahami kenapa kau begitu berarti.",
+  "Kadang aku berpikir, mungkin semesta menaruh sebagian lembutnya di matamu.",
+  "Aku ingin percaya bahwa kebetulan ini bukan kebetulan — hanya takdir yang menyamar.",
+  "Setiap kali aku menulis, tintanya selalu mengarah padamu, meski tak kuminta.",
+  "Jika hatiku sebuah taman, maka kehadiranmu adalah musim semi yang tak pernah pergi.",
+  "Aku tak berani berkata apa-apa, tapi setiap diamku berbisik hal yang sama: kau istimewa."
+];
+
+// buat salinan dan acak urutan pesan
+let remaining = shuffle([...allMessages]);
+
+const btn = document.getElementById('moodBtn');
+const msg = document.getElementById('message');
+const bgm = document.getElementById('bgm');
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+btn.addEventListener('click', () => {
+  if (bgm.paused) bgm.play();
+
+  // ambil pesan berikutnya
+  if (remaining.length === 0) remaining = shuffle([...allMessages]);
+  const nextMsg = remaining.shift();
+
+  // efek fade in/out
+  msg.style.opacity = 0;
+  setTimeout(() => {
+    msg.textContent = nextMsg;
+    msg.style.opacity = 1;
+  }, 500);
+
+  // bunga jatuh
+  for (let i = 0; i < 8; i++) {
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+        flower.textContent = ['🌸','🌷','💮','❤️'][Math.floor(Math.random()*4)];
+    flower.style.left = Math.random() * 100 + 'vw';
+    flower.style.animationDuration = (5 + Math.random() * 4) + 's';
+    flower.style.fontSize = (18 + Math.random() * 16) + 'px';
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 9000);
+  }
+});
+
+// kunang-kunang berterbangan
+for (let i = 0; i < 25; i++) {
+  const f = document.createElement('div');
+  f.classList.add('firefly');
+  f.style.left = Math.random() * 100 + 'vw';
+  f.style.top = Math.random() * 100 + 'vh';
+  f.style.animationDelay = Math.random() * 12 + 's';
+  f.style.animationDuration = 10 + Math.random() * 10 + 's';
+  document.body.appendChild(f);
+}
+</script>
+</body>
+</html>
